@@ -4,7 +4,7 @@
   "description": "RequireJS plugin for AngularJS",
   "repository": {
     "type": "git",
-    "url": "git://github.com/marcoslin/angularAMD.git"
+    "url": "git://github.com/domakas/angularAMD.git"
   },
   "keywords": [
     "angularjs",
@@ -40,6 +40,7 @@
     "protractor": "~0.21.0"
   },
   "scripts": {
-    "test": "grunt build-travis"
+    "test": "grunt build-travis",
+    "build": "grunt build"
   }
 }

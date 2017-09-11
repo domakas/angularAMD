@@ -162,6 +162,19 @@ define(function () {
             config.resolve = resolve;
         }
 
+        if (config.hasOwnProperty('componentUrl')) {
+            var resolve = config.resolve || {};
+            resolve['__AAMDCtrl'] = ['$q', '$rootScope', function ($q, $rootScope) { // jshint ignore:line
+                var defer = $q.defer();
+                require([config.componentUrl], function () {
+                    defer.resolve();
+                    $rootScope.$apply();
+                });
+                return defer.promise;
+            }];
+            config.resolve = resolve;
+        }
+
         return config;
     };
     

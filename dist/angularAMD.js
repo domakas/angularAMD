@@ -1,9 +1,8 @@
-/*
- angularAMD v<%= cvars.proj_version %>
+/*!
+ angularAMD v0.2.2
  (c) 2013-2014 Marcos Lin https://github.com/marcoslin/
  License: MIT
 */
-
 define(function () {
     'use strict';
     var bootstrapped = false,
@@ -155,6 +154,19 @@ define(function () {
                 var defer = $q.defer();
                 require([load_controller], function (ctrl) {
                     defer.resolve(ctrl);
+                    $rootScope.$apply();
+                });
+                return defer.promise;
+            }];
+            config.resolve = resolve;
+        }
+
+        if (config.hasOwnProperty('componentUrl')) {
+            var resolve = config.resolve || {};
+            resolve['__AAMDCtrl'] = ['$q', '$rootScope', function ($q, $rootScope) { // jshint ignore:line
+                var defer = $q.defer();
+                require([config.componentUrl], function () {
+                    defer.resolve();
                     $rootScope.$apply();
                 });
                 return defer.promise;
